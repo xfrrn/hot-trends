@@ -1,4 +1,4 @@
-.PHONY: build run test clean docker-build docker-run
+.PHONY: deps quickstart build run test clean docker-build docker-run docker-stop docker-logs fmt lint dev
 
 # Build the application
 build:
@@ -6,6 +6,11 @@ build:
 
 # Run the application
 run:
+	go run ./cmd/server
+
+# One command local quick start
+quickstart:
+	go mod download
 	go run ./cmd/server
 
 # Run tests

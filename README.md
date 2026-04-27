@@ -12,6 +12,7 @@ This project is based on the scraping logic and platform implementations from [*
 - **This Implementation**: Go microservice adaptation for the AutoUp-Agentic project
 
 All platform scraping patterns, API endpoints, and data transformation logic are derived from the original TypeScript implementation. This Go version provides:
+
 - Higher performance and lower memory footprint
 - Better concurrency handling with goroutines
 - Standalone microservice architecture
@@ -69,17 +70,27 @@ All platform scraping patterns, API endpoints, and data transformation logic are
 ### Local Development
 
 ```bash
-# Clone the repository
-cd hot-trends-service
+# Enter project root
+cd hot-trends
 
 # Download dependencies
 go mod download
 
 # Build the application
-go build -o server ./cmd/server
+go build -o bin/server ./cmd/server
 
 # Run the server
-./server
+./bin/server
+```
+
+### Quick Start (One Command)
+
+```bash
+# Option 1: Makefile
+make quickstart
+
+# Option 2: Go directly (works well on Windows PowerShell)
+go run ./cmd/server
 ```
 
 The server will start on `http://localhost:6000`
@@ -88,7 +99,7 @@ The server will start on `http://localhost:6000`
 
 ```bash
 # Build and run with docker-compose
-cd hot-trends-service
+cd hot-trends
 docker-compose -f deployments/docker-compose.yml up -d
 
 # Or build manually
@@ -105,6 +116,7 @@ GET /health
 ```
 
 **Response:**
+
 ```json
 {
   "status": "ok",
@@ -121,11 +133,13 @@ GET /api/v1/trends/{platform}?limit=10&keyword=羽毛球
 ```
 
 **Parameters:**
+
 - `platform` (path): Platform identifier (e.g., `weibo`, `zhihu`, `douyin`)
 - `limit` (query, optional): Number of items to return (default: 10, max: 100)
 - `keyword` (query, optional): Filter trends by keyword
 
 **Response:**
+
 ```json
 {
   "platform": "weibo",
@@ -162,6 +176,7 @@ Content-Type: application/json
 ```
 
 **Response:**
+
 ```json
 {
   "results": [
@@ -193,6 +208,7 @@ GET /api/v1/platforms
 ```
 
 **Response:**
+
 ```json
 {
   "platforms": [
@@ -220,6 +236,7 @@ GET /api/v1/platforms
 ## 🎯 Supported Platforms
 
 ### Tier 1 - Critical Platforms (Implemented)
+
 - ✅ **weibo** - 微博热搜
 - ✅ **zhihu** - 知乎热榜
 - ✅ **douyin** - 抖音热搜
@@ -227,6 +244,7 @@ GET /api/v1/platforms
 - ✅ **bilibili** - 哔哩哔哩热榜
 
 ### Tier 2 - Important Platforms (Implemented)
+
 - ✅ **github** - GitHub Trending
 - ✅ **baidu** - 百度热搜
 - ✅ **toutiao** - 今日头条
@@ -234,6 +252,7 @@ GET /api/v1/platforms
 - ✅ **csdn** - CSDN
 
 ### Tier 3 - Additional Platforms (To Be Implemented)
+
 - ⏳ **tieba** - 百度贴吧
 - ⏳ **netease** - 网易新闻
 - ⏳ **qq** - 腾讯新闻
