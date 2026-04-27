@@ -109,6 +109,15 @@ docker run -p 6000:6000 hot-trends:latest
 
 ## 🔌 API Documentation
 
+### Interactive Docs (Swagger UI)
+
+After starting the server, open:
+
+- `http://localhost:6000/docs` (default)
+- `http://localhost:6001/docs` (if you set `PORT=6001`)
+
+You can call APIs directly on this page using **Try it out**.
+
 ### Health Check
 
 ```bash

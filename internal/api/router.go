@@ -11,6 +11,11 @@ import (
 func SetupRouter(executor *scraper.Executor, registry *scraper.Registry, redisConnected func() bool) *gin.Engine {
 	r := gin.Default()
 
+	// Interactive API docs
+	docsHandler := handlers.NewDocsHandler()
+	r.GET("/docs", docsHandler.SwaggerUI)
+	r.GET("/openapi.json", docsHandler.OpenAPI)
+
 	// Health check
 	healthHandler := handlers.NewHealthHandler(redisConnected, registry.Count())
 	r.GET("/health", healthHandler.Handle)
