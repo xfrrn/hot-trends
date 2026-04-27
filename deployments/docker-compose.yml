@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  hot-trends:
+    build:
+      context: ..
+      dockerfile: deployments/Dockerfile
+    ports:
+      - "6000:6000"
+    environment:
+      - GIN_MODE=release
+    restart: unless-stopped
+    networks:
+      - hot-trends-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - hot-trends-network
+
+networks:
+  hot-trends-network:
+    driver: bridge
+
+volumes:
+  redis-data:
